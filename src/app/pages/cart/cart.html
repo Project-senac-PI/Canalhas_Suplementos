@@ -1,0 +1,107 @@
+<section class="carrinho">
+
+    <h1>CARRINHO <span>DE COMPRAS</span></h1>
+
+    <div class="carrinho-container">
+
+        
+        <div class="produtos">
+
+            @for (item of itens; track item.produto.id) {
+            <div class="produto">
+
+                <img
+                    [src]="item.produto.imagemUrl"
+                    [alt]="item.produto.nome"
+                    class="produto-imagem"
+                >
+
+                <div class="produto-info">
+                    <strong>{{ item.produto.nome }}</strong>
+                    <span>{{ item.produto.descricao }}</span>
+                </div>
+
+                <span class="preco-unitario">
+                    {{ item.produto.preco | currency: 'BRL': 'symbol':'1.2-2' }}
+                </span>
+
+                <div class="quantidade">
+                    <button>-</button>
+                    <span>{{ item.quantidade }}</span>
+                    <button (click)="adicionarAoCarrinho(item.produto)">+</button>
+                </div>
+
+                <strong class="subtotal">
+                    {{ item.produto.preco * item.quantidade | currency: 'BRL': 'symbol':'1.2-2' }}
+                </strong>
+
+                <button class="remover" (click)="retirarDoCarrinho(item.produto)">
+                    🗑
+                </button>
+
+            </div>
+            } @empty {
+            <p class="carrinho-vazio">Seu carrinho está vazio.</p>
+            }
+
+
+            <button routerLink="/produtos" class="continuar-comprando">
+                ← CONTINUAR COMPRANDO
+            </button>
+
+        </div>
+
+
+        
+        <aside class="resumo">
+
+            <h2>RESUMO DO PEDIDO</h2>
+
+            <div class="resumo-linha">
+                <span>Subtotal ({{ itens.length }} itens)</span>
+                <span>{{ calcularTotal() | currency: 'BRL': 'symbol':'1.2-2' }}</span>
+            </div>
+
+            <div class="resumo-linha">
+                <span>Frete</span>
+                <a href="#">Calcular</a>
+            </div>
+
+            <hr>
+
+            <div class="resumo-total">
+                <strong>Total</strong>
+                <strong>{{ calcularTotal() | currency: 'BRL': 'symbol':'1.2-2' }}</strong>
+            </div>
+
+            <button class="finalizar">
+                FINALIZAR COMPRA
+            </button>
+
+
+            
+
+            <div class="frete">
+
+                <h3>Calcular frete</h3>
+
+                <div class="frete-form">
+
+                    <input
+                        type="text"
+                        placeholder="Digite seu CEP"
+                    >
+
+                    <button>
+                        CALCULAR
+                    </button>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</section>
