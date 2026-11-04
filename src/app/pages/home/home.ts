@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Produto } from '../../models/produtos.model';
@@ -13,7 +13,7 @@ import { CarrinhoService } from '../../services/carrinho.service';
 })
 export class Home implements OnInit {
 
-  produtosMaisVendidos: Produto[] = []
+  produtosMaisVendidos = signal<Produto[]>([]);
 
   constructor(
     private produtosService: ProdutosService,
@@ -21,9 +21,9 @@ export class Home implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.produtosService.getMaisVendidos().subscribe({
+    this.produtosService.listar().subscribe({
       next: (dados) => {
-        this.produtosMaisVendidos = dados;
+        this.produtosMaisVendidos.set(dados.filter(p => p.maisVendido));
       },
       error: (err) => console.error('Erro ao carregar produtos:', err)
     });

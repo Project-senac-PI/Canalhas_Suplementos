@@ -1,15 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { categoriaProduto, Produto } from '../../models/produtos.model';
+import { ProdutosService } from '../../services/produtos.service';
 
 @Component({
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, FormsModule],
   selector: 'app-gerenciar-produtos',
   styleUrls: ['../painel.css', './gerenciar-produtos.css'],
   templateUrl: './gerenciar-produtos.html',
 })
-export class GerenciarProdutos {
+export class GerenciarProdutos implements OnInit {
+  private service = inject(ProdutosService);
+
+  listaProdutos = signal<Produto[]>([]);
+  busca: string = '';
 
   categorias = [
     categoriaProduto.PROTEINAS,
@@ -20,67 +26,34 @@ export class GerenciarProdutos {
     categoriaProduto.ACESSORIOS
   ];
 
-  // dados de exemplo apenas para visualizar o layout
-  produtos: Produto[] = [
-    {
-      id: 1,
-      nome: 'WHEY PROTEIN',
-      descricao: 'Concentrado 900g',
-      preco: 119.90,
-      imagemUrl: '/assets/produtos/whey.png',
-      maisVendido: true,
-      categoria: categoriaProduto.PROTEINAS
-    },
-    {
-      id: 2,
-      nome: 'CREATINA',
-      descricao: 'Monohidratada 300g',
-      preco: 69.90,
-      imagemUrl: '/assets/produtos/creatina.png',
-      maisVendido: true,
-      categoria: categoriaProduto.CREATINA
-    },
-    {
-      id: 3,
-      nome: 'PRÉ-TREINO',
-      descricao: 'Insano 300g',
-      preco: 89.90,
-      imagemUrl: '/assets/produtos/pre-treino.png',
-      maisVendido: true,
-      categoria: categoriaProduto.PRE_TREINO
-    },
-    {
-      id: 4,
-      nome: 'BCAA',
-      descricao: '120 cápsulas',
-      preco: 49.90,
-      imagemUrl: '/assets/produtos/bcaa.png',
-      maisVendido: false,
-      categoria: categoriaProduto.VITAMINAS
-    },
-    {
-      id: 5,
-      nome: 'CAMISETA DE TREINO CANALHAS',
-      descricao: 'Tamanhos P, M, G e GG',
-      preco: 49.90,
-      imagemUrl: '/assets/produtos/camiseta.png',
-      maisVendido: false,
-      categoria: categoriaProduto.VESTIMENTAS
-    },
-    {
-      id: 6,
-      nome: 'GARRAFA CANALHAS',
-      descricao: 'Coqueteleira de treino 700ml',
-      preco: 19.90,
-      imagemUrl: '/assets/produtos/garrafa.png',
-      maisVendido: false,
-      categoria: categoriaProduto.ACESSORIOS
+  ngOnInit(): void {
+    this.service.listar().subscribe({
+      next: (produtos) => {
+        this.listaProdutos.set(produtos);
+      },
+      error: () => alert('Não foi possível carregar os produtos. Verifique se a API está rodando.')
+    });
+  }
+
+  excluir(produto: Produto) {
+    if (!confirm(`Deseja excluir o produto ${produto.nome}?`)) {
+      return;
     }
-  ];
 
-  maisVendidos = this.produtos.filter(p => p.maisVendido).length;
+    this.service.excluir(produto.id).subscribe({
+      next: () => {
+        this.listaProdutos.update(lista => lista.filter(p => p.id !== produto.id));
+      }
+    });
+  }
 
-  cadastrar(evento: Event) {
-    evento.preventDefault();
+  //filtra a lista pelo texto digitado na busca
+  filtrarProdutos(): Produto[] {
+    const texto = this.busca.toLowerCase();
+    return this.listaProdutos().filter(p => p.nome.toLowerCase().includes(texto));
+  }
+
+  contarMaisVendidos(): number {
+    return this.listaProdutos().filter(p => p.maisVendido).length;
   }
 }

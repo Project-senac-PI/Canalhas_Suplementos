@@ -33,7 +33,7 @@
                 <h2>Cadastro de colaborador</h2>
             </div>
 
-            <form id="form-cadastro-colaborador" (submit)="cadastrar($event)">
+            <form id="form-cadastro-colaborador" ngNativeValidate (ngSubmit)="cadastrar()">
 
                 <h3 class="secao-form">Dados pessoais</h3>
                 <div class="grade-form">
@@ -41,7 +41,7 @@
                         <label for="colaborador-nome">Nome completo</label>
                         <div class="campo-entrada">
                             <i class="fa-solid fa-user"></i>
-                            <input type="text" id="colaborador-nome" required minlength="3" placeholder="Nome completo do colaborador" autocomplete="name">
+                            <input type="text" id="colaborador-nome" name="nome" required minlength="3" placeholder="Nome completo do colaborador" autocomplete="name" [(ngModel)]="funcionario().nome">
                         </div>
                     </div>
 
@@ -49,7 +49,7 @@
                         <label for="colaborador-cpf">CPF</label>
                         <div class="campo-entrada">
                             <i class="fa-solid fa-id-card"></i>
-                            <input type="text" id="colaborador-cpf" required placeholder="Somente números" inputmode="numeric">
+                            <input type="text" id="colaborador-cpf" name="cpf" required placeholder="Somente números" inputmode="numeric" [(ngModel)]="funcionario().cpf">
                         </div>
                     </div>
 
@@ -57,7 +57,7 @@
                         <label for="colaborador-data-nascimento">Data de nascimento</label>
                         <div class="campo-entrada">
                             <i class="fa-solid fa-calendar"></i>
-                            <input type="date" id="colaborador-data-nascimento" required>
+                            <input type="date" id="colaborador-data-nascimento" name="dataNascimento" required [(ngModel)]="funcionario().dataNascimento">
                         </div>
                     </div>
 
@@ -65,7 +65,7 @@
                         <label for="colaborador-telefone">Telefone</label>
                         <div class="campo-entrada">
                             <i class="fa-solid fa-phone"></i>
-                            <input type="tel" id="colaborador-telefone" required placeholder="DDD + número" autocomplete="tel">
+                            <input type="tel" id="colaborador-telefone" name="telefone" required placeholder="DDD + número" autocomplete="tel" [(ngModel)]="funcionario().telefone">
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                         <label for="colaborador-matricula">Matrícula</label>
                         <div class="campo-entrada">
                             <i class="fa-solid fa-id-badge"></i>
-                            <input type="text" id="colaborador-matricula" required placeholder="Ex.: CS0001">
+                            <input type="text" id="colaborador-matricula" name="matricula" required placeholder="Ex.: CS0001" [(ngModel)]="funcionario().matricula">
                         </div>
                     </div>
 
@@ -84,7 +84,7 @@
                         <label for="colaborador-data-admissao">Data de admissão</label>
                         <div class="campo-entrada">
                             <i class="fa-solid fa-calendar-check"></i>
-                            <input type="date" id="colaborador-data-admissao" required>
+                            <input type="date" id="colaborador-data-admissao" name="dataAdmissao" required [(ngModel)]="funcionario().dataAdmissao">
                         </div>
                     </div>
 
@@ -92,13 +92,10 @@
                         <label for="colaborador-cargo">Cargo</label>
                         <div class="campo-entrada">
                             <i class="fa-solid fa-briefcase"></i>
-                            <select id="colaborador-cargo" required>
-                                <option value="" disabled selected>Selecione o cargo</option>
-                                <option value="Vendedor">Vendedor</option>
-                                <option value="Atendente">Atendente</option>
-                                <option value="Estoquista">Estoquista</option>
-                                <option value="Gerente">Gerente</option>
-                                <option value="Administrador">Administrador</option>
+                            <select id="colaborador-cargo" name="cargo" required [(ngModel)]="funcionario().cargo">
+                                @for (cargo of cargos; track cargo) {
+                                <option [value]="cargo">{{ cargo }}</option>
+                                }
                             </select>
                         </div>
                     </div>
@@ -107,13 +104,10 @@
                         <label for="colaborador-setor">Setor</label>
                         <div class="campo-entrada">
                             <i class="fa-solid fa-sitemap"></i>
-                            <select id="colaborador-setor" required>
-                                <option value="" disabled selected>Selecione o setor</option>
-                                <option value="Vendas">Vendas</option>
-                                <option value="Atendimento">Atendimento</option>
-                                <option value="Estoque e Logística">Estoque e Logística</option>
-                                <option value="Financeiro">Financeiro</option>
-                                <option value="Administração">Administração</option>
+                            <select id="colaborador-setor" name="setor" required [(ngModel)]="funcionario().setor">
+                                @for (setor of setores; track setor) {
+                                <option [value]="setor">{{ setor }}</option>
+                                }
                             </select>
                         </div>
                     </div>
@@ -125,7 +119,7 @@
                         <label for="colaborador-email">E-mail corporativo</label>
                         <div class="campo-entrada">
                             <i class="fa-solid fa-envelope"></i>
-                            <input type="email" id="colaborador-email" required placeholder="nome@canalhas.com.br" autocomplete="email">
+                            <input type="email" id="colaborador-email" name="email" required placeholder="nome@canalhas.com.br" autocomplete="email" [(ngModel)]="funcionario().email">
                         </div>
                     </div>
 
@@ -133,7 +127,7 @@
                         <label for="colaborador-senha">Senha</label>
                         <div class="campo-entrada">
                             <i class="fa-solid fa-lock"></i>
-                            <input type="password" id="colaborador-senha" required placeholder="Crie uma senha" autocomplete="new-password">
+                            <input type="password" id="colaborador-senha" name="senha" required placeholder="Crie uma senha" autocomplete="new-password" [(ngModel)]="funcionario().senha">
                         </div>
                     </div>
 
@@ -141,7 +135,7 @@
                         <label for="colaborador-confirmar-senha">Confirmar senha</label>
                         <div class="campo-entrada">
                             <i class="fa-solid fa-lock"></i>
-                            <input type="password" id="colaborador-confirmar-senha" required placeholder="Repita a senha" autocomplete="new-password">
+                            <input type="password" id="colaborador-confirmar-senha" name="confirmarSenha" required placeholder="Repita a senha" autocomplete="new-password" [(ngModel)]="confirmarSenha">
                         </div>
                     </div>
                 </div>

@@ -27,4 +27,6 @@ export interface Funcionario {
     dataAdmissao: string;
     cargo: cargoFuncionario;
     setor: setorFuncionario;
+    dataNascimento?: string;
+    senha?: string;
 }

@@ -1,0 +1,148 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "WHEY PROTEIN",
+      "descricao": "Concentrado 900g",
+      "preco": 119.9,
+      "imagemUrl": "/assets/produtos/whey.png",
+      "maisVendido": true,
+      "categoria": "Proteínas"
+    },
+    {
+      "id": 2,
+      "nome": "CREATINA",
+      "descricao": "Monohidratada 300g",
+      "preco": 69.9,
+      "imagemUrl": "/assets/produtos/creatina.png",
+      "maisVendido": true,
+      "categoria": "Creatina"
+    },
+    {
+      "id": 3,
+      "nome": "PRÉ-TREINO",
+      "descricao": "Insano 300g",
+      "preco": 89.9,
+      "imagemUrl": "/assets/produtos/pre-treino.png",
+      "maisVendido": true,
+      "categoria": "Pré-Treino"
+    },
+    {
+      "id": 4,
+      "nome": "BCAA",
+      "descricao": "120 cápsulas",
+      "preco": 49.9,
+      "imagemUrl": "/assets/produtos/bcaa.png",
+      "maisVendido": true,
+      "categoria": "Vitaminas"
+    },
+    {
+      "id": 5,
+      "nome": "CAMISETA DE TREINO CANALHAS",
+      "descricao": "Tamanhos P, M, G e GG",
+      "preco": 49.9,
+      "imagemUrl": "/assets/produtos/camiseta.png",
+      "maisVendido": false,
+      "categoria": "Vestimentas"
+    },
+    {
+      "id": 6,
+      "nome": "GARRAFA CANALHAS",
+      "descricao": "Coqueteleira de treino 700ml",
+      "preco": 19.9,
+      "imagemUrl": "/assets/produtos/garrafa.png",
+      "maisVendido": false,
+      "categoria": "Acessórios"
+    }
+  ],
+  "funcionarios": [
+    {
+      "id": 1,
+      "nome": "Carlos Henrique Souza",
+      "cpf": "11122233301",
+      "telefone": "(11) 91234-0001",
+      "matricula": "CS0001",
+      "email": "carlos.souza@canalhas.com.br",
+      "dataAdmissao": "2022-02-14",
+      "cargo": "Gerente",
+      "setor": "Administração",
+      "senha": "123456"
+    },
+    {
+      "id": 2,
+      "nome": "Mariana Alves",
+      "cpf": "11122233302",
+      "telefone": "(11) 91234-0002",
+      "matricula": "CS0002",
+      "email": "mariana.alves@canalhas.com.br",
+      "dataAdmissao": "2023-05-02",
+      "cargo": "Vendedor",
+      "setor": "Vendas",
+      "senha": "123456"
+    },
+    {
+      "id": 3,
+      "nome": "Rafael Lima",
+      "cpf": "11122233303",
+      "telefone": "(11) 91234-0003",
+      "matricula": "CS0003",
+      "email": "rafael.lima@canalhas.com.br",
+      "dataAdmissao": "2023-09-18",
+      "cargo": "Estoquista",
+      "setor": "Estoque e Logística",
+      "senha": "123456"
+    },
+    {
+      "id": 4,
+      "nome": "Juliana Rocha",
+      "cpf": "11122233304",
+      "telefone": "(11) 91234-0004",
+      "matricula": "CS0004",
+      "email": "juliana.rocha@canalhas.com.br",
+      "dataAdmissao": "2024-01-08",
+      "cargo": "Atendente",
+      "setor": "Atendimento",
+      "senha": "123456"
+    },
+    {
+      "id": 5,
+      "nome": "Bruno Martins",
+      "cpf": "11122233305",
+      "telefone": "(11) 91234-0005",
+      "matricula": "CS0005",
+      "email": "bruno.martins@canalhas.com.br",
+      "dataAdmissao": "2025-03-10",
+      "cargo": "Administrador",
+      "setor": "Financeiro",
+      "senha": "123456"
+    }
+  ],
+  "clientes": [
+    {
+      "id": 1,
+      "nome": "Lucas Pereira",
+      "cpf": "22233344401",
+      "dataNascimento": "1998-07-21",
+      "telefone": "(11) 98888-0001",
+      "endereco": "Rua das Palmeiras",
+      "numero": "120",
+      "complemento": "Apto 32",
+      "email": "lucas.pereira@email.com",
+      "senha": "123456",
+      "newsletter": true
+    },
+    {
+      "id": 2,
+      "nome": "Fernanda Costa",
+      "cpf": "22233344402",
+      "dataNascimento": "2001-03-05",
+      "telefone": "(11) 98888-0002",
+      "endereco": "Avenida Paulista",
+      "numero": "1500",
+      "complemento": "",
+      "email": "fernanda.costa@email.com",
+      "senha": "123456",
+      "newsletter": false
+    }
+  ]
+}

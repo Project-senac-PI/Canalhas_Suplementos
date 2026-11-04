@@ -37,7 +37,7 @@ export class Produtos implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    const todosProdutos$ = this.produtosService.getProdutos();
+    const todosProdutos$ = this.produtosService.listar();
 
     this.produtosFiltrados$ = combineLatest([todosProdutos$, this.categoriaSelecionada$]).pipe(
       map(([produtos, categoria]) => {

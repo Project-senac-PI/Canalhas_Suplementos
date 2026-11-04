@@ -1,76 +1,33 @@
-import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
-import { categoriaProduto, Produto } from "../models/produtos.model";
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Produto } from '../models/produtos.model';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
-export class ProdutosService{
+export class ProdutosService {
 
-    private produtos: Produto[] = [
-        {
-            id: 1,
-            nome: 'WHEY PROTEIN',
-            descricao: 'Concentrado 900g',
-            preco: 119.90,
-            imagemUrl: '/public/assets/produtos/whey.png',
-            maisVendido: true,
-            categoria: categoriaProduto.PROTEINAS
-        },
-        {
-            id: 2,
-            nome: 'CREATINA',
-            descricao: 'Monohidratada 300g',
-            preco: 69.90,
-            imagemUrl: '',
-            maisVendido: true,
-            categoria: categoriaProduto.CREATINA
-        },
-        {
-            id: 3,
-            nome: 'PRÉ-TREINO',
-            descricao: 'Insano 300g',
-            preco: 89.90,
-            imagemUrl: '',
-            maisVendido: true,
-            categoria: categoriaProduto.PRE_TREINO
-        },
-        {
-            id: 4,
-            nome: 'BCAA',
-            descricao: '120 cápsulas',
-            preco: 49.90,
-            imagemUrl: '',
-            maisVendido: true,
-            categoria: categoriaProduto.VITAMINAS
-        },
-        {
-            id: 5,
-            nome: 'CAMISETA DE TREINO CANALHAS',
-            descricao: 'Tamanhos P, M, G e GG',
-            preco: 49.90,
-            imagemUrl: '',
-            maisVendido: false,
-            categoria: categoriaProduto.VESTIMENTAS
-        },
-        {
-            id: 6,
-            nome: 'GARRAFA CANALHAS',
-            descricao: 'Coqueteleira de treino 700ml',
-            preco: 19.90,
-            imagemUrl: '',
-            maisVendido: false,
-            categoria: categoriaProduto.ACESSORIOS
-        }
-    ];
+  private readonly API = 'http://localhost:3000/produtos';
+  private produtoHTTP = inject(HttpClient);
 
-    getProdutos(): Observable<Produto[]> {
-        return of(this.produtos);
-    }
+  listar(): Observable<Produto[]> {
+    return this.produtoHTTP.get<Produto[]>(this.API);
+  }
 
-    getMaisVendidos(): Observable<Produto[]> {
-        const maisVendidos = this.produtos.filter(p => p.maisVendido);
-        return of(maisVendidos);
-    }
+  buscarPorId(id: string): Observable<Produto> {
+    return this.produtoHTTP.get<Produto>(`${this.API}/${id}`);
+  }
 
+  incluir(produto: Produto): Observable<Produto> {
+    return this.produtoHTTP.post<Produto>(this.API, produto);
+  }
+
+  editar(produto: Produto): Observable<Produto> {
+    return this.produtoHTTP.put<Produto>(`${this.API}/${produto.id}`, produto);
+  }
+
+  excluir(id: number): Observable<void> {
+    return this.produtoHTTP.delete<void>(`${this.API}/${id}`);
+  }
 }

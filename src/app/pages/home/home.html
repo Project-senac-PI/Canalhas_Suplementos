@@ -70,7 +70,7 @@
     </div>
 
     <div class="grid-produtos">
-        @for (produto of produtosMaisVendidos; track produto.id) {
+        @for (produto of produtosMaisVendidos(); track produto.id) {
         <div class="card-produto">
             <div class="container-imagem-produto">
                 <img [src]="produto.imagemUrl" [alt]="produto.nome">
