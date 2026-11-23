@@ -8,7 +8,7 @@ import { Produto } from '../models/produtos.model';
 })
 export class ProdutosService {
 
-  private readonly API = 'http://localhost:3000/produtos';
+  private API = 'http://localhost:3000/produtos';
   private produtoHTTP = inject(HttpClient);
 
   listar(): Observable<Produto[]> {

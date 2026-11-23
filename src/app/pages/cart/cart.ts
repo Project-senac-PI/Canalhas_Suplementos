@@ -14,8 +14,9 @@ import { CarrinhoService } from '../../services/carrinho.service';
 export class Cart implements OnInit {
 
   itens: ItemCarrinho[] = [];
+  mostrarPopup = false
 
-  constructor(private carrinhoService: CarrinhoService) {}
+  constructor(private carrinhoService: CarrinhoService) { }
 
   ngOnInit(): void {
     this.carrinhoService.getItens().subscribe({
@@ -34,6 +35,10 @@ export class Cart implements OnInit {
     this.carrinhoService.retirarDoCarrinho(produto);
   }
 
+  diminuirQuantidade(produto: Produto): void {
+    this.carrinhoService.diminuirQuantidade(produto);
+  }
+
   calcularTotal(): number {
     let total = 0;
 
@@ -43,4 +48,17 @@ export class Cart implements OnInit {
 
     return total;
   }
+
+  finalizarCompra(): void {
+    if (this.itens.length === 0) return;
+
+    this.calcularTotal();
+    this.mostrarPopup = true
+  }
+
+  fecharPopup(): void {
+    this.mostrarPopup = false;
+    this.carrinhoService.limparCarrinho();
+  }
+
 }
