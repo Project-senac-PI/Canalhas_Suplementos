@@ -1,14 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { cargoFuncionario, Funcionario, setorFuncionario } from '../../models/funcionarios.model';
+import { FuncionariosService } from '../../services/funcionarios.service';
 
 @Component({
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule, FormsModule],
   selector: 'app-gerenciar-funcionarios',
   styleUrls: ['../painel.css', './gerenciar-funcionarios.css'],
   templateUrl: './gerenciar-funcionarios.html',
 })
-export class GerenciarFuncionarios {
+export class GerenciarFuncionarios implements OnInit {
+  private service = inject(FuncionariosService);
+
+  listaFuncionarios = signal<Funcionario[]>([]);
+  busca: string = '';
 
   cargos = [
     cargoFuncionario.VENDEDOR,
@@ -26,66 +33,32 @@ export class GerenciarFuncionarios {
     setorFuncionario.ADMINISTRACAO
   ];
 
-  // dados de exemplo apenas para visualizar o layout
-  funcionarios: Funcionario[] = [
-    {
-      id: 1,
-      nome: 'Carlos Henrique Souza',
-      cpf: '111.222.333-01',
-      telefone: '(11) 91234-0001',
-      matricula: 'CS0001',
-      email: 'carlos.souza@canalhas.com.br',
-      dataAdmissao: '14/02/2022',
-      cargo: cargoFuncionario.GERENTE,
-      setor: setorFuncionario.ADMINISTRACAO
-    },
-    {
-      id: 2,
-      nome: 'Mariana Alves',
-      cpf: '111.222.333-02',
-      telefone: '(11) 91234-0002',
-      matricula: 'CS0002',
-      email: 'mariana.alves@canalhas.com.br',
-      dataAdmissao: '02/05/2023',
-      cargo: cargoFuncionario.VENDEDOR,
-      setor: setorFuncionario.VENDAS
-    },
-    {
-      id: 3,
-      nome: 'Rafael Lima',
-      cpf: '111.222.333-03',
-      telefone: '(11) 91234-0003',
-      matricula: 'CS0003',
-      email: 'rafael.lima@canalhas.com.br',
-      dataAdmissao: '18/09/2023',
-      cargo: cargoFuncionario.ESTOQUISTA,
-      setor: setorFuncionario.ESTOQUE_LOGISTICA
-    },
-    {
-      id: 4,
-      nome: 'Juliana Rocha',
-      cpf: '111.222.333-04',
-      telefone: '(11) 91234-0004',
-      matricula: 'CS0004',
-      email: 'juliana.rocha@canalhas.com.br',
-      dataAdmissao: '08/01/2024',
-      cargo: cargoFuncionario.ATENDENTE,
-      setor: setorFuncionario.ATENDIMENTO
-    },
-    {
-      id: 5,
-      nome: 'Bruno Martins',
-      cpf: '111.222.333-05',
-      telefone: '(11) 91234-0005',
-      matricula: 'CS0005',
-      email: 'bruno.martins@canalhas.com.br',
-      dataAdmissao: '10/03/2025',
-      cargo: cargoFuncionario.ADMINISTRADOR,
-      setor: setorFuncionario.FINANCEIRO
-    }
-  ];
+  ngOnInit(): void {
+    this.service.listar().subscribe({
+      next: (funcionarios) => {
+        this.listaFuncionarios.set(funcionarios);
+      },
+      error: () => alert('Não foi possível carregar os funcionários. Verifique se a API está rodando.')
+    });
+  }
 
-  cadastrar(evento: Event) {
-    evento.preventDefault();
+  excluir(funcionario: Funcionario) {
+    if (!confirm(`Deseja excluir o funcionário ${funcionario.nome}?`)) {
+      return;
+    }
+
+    this.service.excluir(funcionario.id).subscribe({
+      next: () => {
+        this.listaFuncionarios.update(lista => lista.filter(f => f.id !== funcionario.id));
+      }
+    });
+  }
+
+  //filtra a lista pelo nome ou matrícula digitados na busca
+  filtrarFuncionarios(): Funcionario[] {
+    const texto = this.busca.toLowerCase();
+    return this.listaFuncionarios().filter(f =>
+      f.nome.toLowerCase().includes(texto) || f.matricula.toLowerCase().includes(texto)
+    );
   }
 }

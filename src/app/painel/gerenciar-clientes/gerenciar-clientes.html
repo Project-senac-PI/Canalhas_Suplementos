@@ -1,0 +1,98 @@
+<div class="tela-painel">
+    <header class="cabecalho-painel">
+        <div class="titulo-painel">
+            <span class="etiqueta"><i class="fa-solid fa-lock"></i> Área restrita</span>
+            <h1>Gestão de <span class="destaque-amarelo">clientes</span></h1>
+            <p>Consulte, cadastre, altere e remova os clientes da loja.</p>
+        </div>
+
+        <nav class="abas-painel" aria-label="Seções do painel">
+            <a routerLink="/colaborador/produtos" id="aba-produtos"><i class="fa-solid fa-boxes-stacked"></i> Produtos</a>
+            <a routerLink="/colaborador/funcionarios" id="aba-funcionarios"><i class="fa-solid fa-users"></i> Funcionários</a>
+            <a routerLink="/colaborador/clientes" class="ativa" id="aba-clientes"><i class="fa-solid fa-user-group"></i> Clientes</a>
+        </nav>
+    </header>
+
+    <div class="conteudo-painel">
+        <ul class="cartoes-resumo">
+            <li>
+                <i class="fa-solid fa-user-group"></i>
+                <div><strong>{{ listaClientes().length }}</strong><small>Clientes cadastrados</small></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-envelope-open-text"></i>
+                <div><strong>{{ contarNewsletter() }}</strong><small>Recebem ofertas</small></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-envelope"></i>
+                <div><strong>{{ listaClientes().length - contarNewsletter() }}</strong><small>Não recebem ofertas</small></div>
+            </li>
+        </ul>
+
+        <section class="card-painel destaque">
+            <div class="cabecalho-card com-busca">
+                <div>
+                    <p class="subtitulo">Carteira</p>
+                    <h2>Clientes cadastrados</h2>
+                </div>
+
+                <div class="acoes-lista">
+                    <div class="campo-entrada busca">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="search" id="busca-cliente" name="busca" placeholder="Buscar por nome ou CPF" aria-label="Buscar cliente" [(ngModel)]="busca">
+                    </div>
+
+                    <a routerLink="/cadastro" id="botao-novo-cliente" class="botao-ouro botao-novo">
+                        Novo cliente <i class="fa-solid fa-user-plus"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="cabecalho-lista" aria-hidden="true">
+                <span></span>
+                <span>Cliente</span>
+                <span>CPF / Telefone</span>
+                <span>Endereço</span>
+                <span>Ações</span>
+            </div>
+
+            <ul class="lista-itens">
+                @for (cliente of filtrarClientes(); track cliente.id) {
+                <li class="item-lista">
+                    <div class="item-avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <div class="item-info">
+                        <strong>{{ cliente.nome }}</strong>
+                        <small>{{ cliente.email }}</small>
+                    </div>
+
+                    <div class="item-info item-documento">
+                        <strong>{{ cliente.cpf }}</strong>
+                        <small>{{ cliente.telefone }}</small>
+                    </div>
+
+                    <div class="item-info item-endereco">
+                        <small>{{ cliente.endereco }}, {{ cliente.numero }}</small>
+                        @if (cliente.complemento) {
+                        <small>{{ cliente.complemento }}</small>
+                        }
+                    </div>
+
+                    <div class="item-acoes">
+                        <a class="botao-editar" title="Editar cliente" [routerLink]="['/colaborador/clientes/editar', cliente.id]">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                        <button type="button" class="botao-remover" title="Excluir cliente" (click)="excluir(cliente)">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                </li>
+                } @empty {
+                <li class="mensagem-vazia">Nenhum cliente encontrado.</li>
+                }
+            </ul>
+        </section>
+    </div>
+</div>

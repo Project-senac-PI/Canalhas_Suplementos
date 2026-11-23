@@ -1,6 +1,6 @@
 .cabecalho-lista,
 .item-lista {
-    grid-template-columns: 52px minmax(0, 1.5fr) minmax(0, 1fr) 100px 38px;
+    grid-template-columns: 52px minmax(0, 1.5fr) minmax(0, 1fr) 100px 84px;
 }
 
 .item-imagem {
@@ -28,10 +28,11 @@
 
 @media (max-width: 600px) {
     .item-lista {
-        grid-template-columns: 52px minmax(0, 1fr) auto 38px;
+        grid-template-columns: 52px minmax(0, 1fr) 84px;
     }
 
-    .item-tags {
+    .item-tags,
+    .item-preco {
         display: none;
     }
 }

@@ -33,12 +33,12 @@
                 <h2>Login do colaborador</h2>
             </div>
 
-            <form id="form-login-colaborador" (submit)="entrar($event)">
+            <form id="form-login-colaborador" ngNativeValidate (ngSubmit)="entrar()">
                 <div class="campo">
                     <label for="colaborador-usuario">Matrícula ou e-mail corporativo</label>
                     <div class="campo-entrada">
                         <i class="fa-solid fa-id-badge"></i>
-                        <input type="text" id="colaborador-usuario" required placeholder="Ex.: CS0001 ou nome@canalhas.com.br" autocomplete="username">
+                        <input type="text" id="colaborador-usuario" name="usuario" required placeholder="Ex.: CS0001 ou nome@canalhas.com.br" autocomplete="username" [(ngModel)]="usuario">
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@
                     <label for="colaborador-senha">Senha</label>
                     <div class="campo-entrada">
                         <i class="fa-solid fa-lock"></i>
-                        <input type="password" id="colaborador-senha" required placeholder="••••••••" autocomplete="current-password">
+                        <input type="password" id="colaborador-senha" name="senha" required placeholder="••••••••" autocomplete="current-password" [(ngModel)]="senha">
                     </div>
                 </div>
 

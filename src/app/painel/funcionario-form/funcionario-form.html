@@ -1,0 +1,150 @@
+<div class="tela-painel">
+    <header class="cabecalho-painel">
+        <div class="titulo-painel">
+            <span class="etiqueta"><i class="fa-solid fa-lock"></i> Área restrita</span>
+            @if (funcionarioId) {
+            <h1>Alterar <span class="destaque-amarelo">funcionário</span></h1>
+            <p>Atualize os dados do membro da equipe.</p>
+            } @else {
+            <h1>Novo <span class="destaque-amarelo">funcionário</span></h1>
+            <p>Preencha os dados para adicionar um novo membro à equipe.</p>
+            }
+        </div>
+
+        <nav class="abas-painel" aria-label="Seções do painel">
+            <a routerLink="/colaborador/produtos" id="aba-produtos"><i class="fa-solid fa-boxes-stacked"></i> Produtos</a>
+            <a routerLink="/colaborador/funcionarios" class="ativa" id="aba-funcionarios"><i class="fa-solid fa-users"></i> Funcionários</a>
+            <a routerLink="/colaborador/clientes" id="aba-clientes"><i class="fa-solid fa-user-group"></i> Clientes</a>
+        </nav>
+    </header>
+
+    <div class="conteudo-painel">
+        <section class="card-painel destaque formulario">
+            <div class="cabecalho-card">
+                <p class="subtitulo">{{ funcionarioId ? 'Alteração' : 'Cadastro' }}</p>
+                <h2>Dados do funcionário</h2>
+            </div>
+
+            <form id="form-funcionario" ngNativeValidate (ngSubmit)="salvar()">
+
+                <h3 class="secao-form">Dados pessoais</h3>
+                <div class="grade-form">
+                    @if (funcionarioId) {
+                    <div class="campo inteiro">
+                        <label for="funcionario-id">ID</label>
+                        <div class="campo-entrada">
+                            <i class="fa-solid fa-hashtag"></i>
+                            <input type="text" id="funcionario-id" name="id" [ngModel]="funcionario().id" disabled>
+                        </div>
+                    </div>
+                    }
+
+                    <div class="campo inteiro">
+                        <label for="funcionario-nome">Nome completo</label>
+                        <div class="campo-entrada">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" id="funcionario-nome" name="nome" required minlength="3" placeholder="Nome completo do funcionário" [(ngModel)]="funcionario().nome">
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="funcionario-cpf">CPF</label>
+                        <div class="campo-entrada">
+                            <i class="fa-solid fa-id-card"></i>
+                            <input type="text" id="funcionario-cpf" name="cpf" required placeholder="Somente números" inputmode="numeric" [(ngModel)]="funcionario().cpf">
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="funcionario-telefone">Telefone</label>
+                        <div class="campo-entrada">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="tel" id="funcionario-telefone" name="telefone" required placeholder="DDD + número" [(ngModel)]="funcionario().telefone">
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="secao-form">Dados profissionais</h3>
+                <div class="grade-form">
+                    <div class="campo">
+                        <label for="funcionario-matricula">Matrícula</label>
+                        <div class="campo-entrada">
+                            <i class="fa-solid fa-id-badge"></i>
+                            <input type="text" id="funcionario-matricula" name="matricula" required placeholder="Ex.: CS0001" [(ngModel)]="funcionario().matricula">
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="funcionario-data-admissao">Data de admissão</label>
+                        <div class="campo-entrada">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            <input type="date" id="funcionario-data-admissao" name="dataAdmissao" required [(ngModel)]="funcionario().dataAdmissao">
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="funcionario-cargo">Cargo</label>
+                        <div class="campo-entrada">
+                            <i class="fa-solid fa-briefcase"></i>
+                            <select id="funcionario-cargo" name="cargo" required [(ngModel)]="funcionario().cargo">
+                                @for (cargo of cargos; track cargo) {
+                                <option [value]="cargo">{{ cargo }}</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="funcionario-setor">Setor</label>
+                        <div class="campo-entrada">
+                            <i class="fa-solid fa-sitemap"></i>
+                            <select id="funcionario-setor" name="setor" required [(ngModel)]="funcionario().setor">
+                                @for (setor of setores; track setor) {
+                                <option [value]="setor">{{ setor }}</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="secao-form">Acesso</h3>
+                <div class="grade-form">
+                    <div class="campo inteiro">
+                        <label for="funcionario-email">E-mail corporativo</label>
+                        <div class="campo-entrada">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" id="funcionario-email" name="email" required placeholder="nome@canalhas.com.br" [(ngModel)]="funcionario().email">
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="funcionario-senha">Senha</label>
+                        <div class="campo-entrada">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="funcionario-senha" name="senha" required placeholder="Senha de acesso" autocomplete="new-password" [(ngModel)]="funcionario().senha">
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="funcionario-confirmar-senha">Confirmar senha</label>
+                        <div class="campo-entrada">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="funcionario-confirmar-senha" name="confirmarSenha" required placeholder="Repita a senha" autocomplete="new-password" [(ngModel)]="confirmarSenha">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="acoes-form">
+                    <a routerLink="/colaborador/funcionarios" id="botao-cancelar-funcionario" class="botao-contorno">Cancelar</a>
+                    <button type="submit" id="botao-salvar-funcionario" class="botao-ouro">
+                        @if (funcionarioId) {
+                        Salvar alterações <i class="fa-solid fa-floppy-disk"></i>
+                        } @else {
+                        Adicionar funcionário <i class="fa-solid fa-user-plus"></i>
+                        }
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>

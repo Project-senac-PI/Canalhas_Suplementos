@@ -1,6 +1,6 @@
 .cabecalho-lista,
 .item-lista {
-    grid-template-columns: 44px minmax(0, 1.5fr) minmax(0, 0.8fr) minmax(0, 1fr) 38px;
+    grid-template-columns: 44px minmax(0, 1.5fr) minmax(0, 0.8fr) minmax(0, 1fr) 84px;
 }
 
 .item-avatar {
@@ -22,7 +22,7 @@
 
 @media (max-width: 600px) {
     .item-lista {
-        grid-template-columns: 44px minmax(0, 1fr) 38px;
+        grid-template-columns: 44px minmax(0, 1fr) 84px;
     }
 
     .item-matricula,

@@ -34,4 +34,21 @@ export class CarrinhoService{
         }
     }
 
+    //diminui quantidade do item, se chegar a zero, remove o item do carrinho
+    diminuirQuantidade(produto: Produto): void {
+        const item = this.itens.find(i => i.produto.id === produto.id);
+
+        if(!item) return;
+
+        if(item.quantidade > 1) {
+            item.quantidade--;
+        } else {
+            this.retirarDoCarrinho(produto);
+        }
+    }
+
+    limparCarrinho(): void {
+        this.itens.length = 0
+    }
+
 }

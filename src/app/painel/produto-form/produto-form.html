@@ -1,0 +1,116 @@
+<div class="tela-painel">
+    <header class="cabecalho-painel">
+        <div class="titulo-painel">
+            <span class="etiqueta"><i class="fa-solid fa-lock"></i> Área restrita</span>
+            @if (produtoId) {
+            <h1>Alterar <span class="destaque-amarelo">produto</span></h1>
+            <p>Atualize as informações do produto selecionado.</p>
+            } @else {
+            <h1>Novo <span class="destaque-amarelo">produto</span></h1>
+            <p>Preencha os dados para adicionar um item ao catálogo.</p>
+            }
+        </div>
+
+        <nav class="abas-painel" aria-label="Seções do painel">
+            <a routerLink="/colaborador/produtos" class="ativa" id="aba-produtos"><i class="fa-solid fa-boxes-stacked"></i> Produtos</a>
+            <a routerLink="/colaborador/funcionarios" id="aba-funcionarios"><i class="fa-solid fa-users"></i> Funcionários</a>
+            <a routerLink="/colaborador/clientes" id="aba-clientes"><i class="fa-solid fa-user-group"></i> Clientes</a>
+        </nav>
+    </header>
+
+    <div class="conteudo-painel">
+        <section class="card-painel destaque formulario">
+            <div class="cabecalho-card">
+                <p class="subtitulo">{{ produtoId ? 'Alteração' : 'Cadastro' }}</p>
+                <h2>Dados do produto</h2>
+            </div>
+
+            <form id="form-produto" ngNativeValidate (ngSubmit)="salvar()">
+
+                <h3 class="secao-form">Informações</h3>
+                <div class="grade-form">
+                    @if (produtoId) {
+                    <div class="campo inteiro">
+                        <label for="produto-id">ID</label>
+                        <div class="campo-entrada">
+                            <i class="fa-solid fa-hashtag"></i>
+                            <input type="text" id="produto-id" name="id" [ngModel]="produto().id" disabled>
+                        </div>
+                    </div>
+                    }
+
+                    <div class="campo inteiro">
+                        <label for="produto-nome">Nome do produto</label>
+                        <div class="campo-entrada">
+                            <i class="fa-solid fa-tag"></i>
+                            <input type="text" id="produto-nome" name="nome" required minlength="3" placeholder="Ex.: Whey Protein" [(ngModel)]="produto().nome">
+                        </div>
+                    </div>
+
+                    <div class="campo inteiro">
+                        <label for="produto-descricao">Descrição</label>
+                        <div class="campo-entrada texto-longo">
+                            <i class="fa-solid fa-align-left"></i>
+                            <textarea id="produto-descricao" name="descricao" rows="3" required placeholder="Ex.: Concentrado 900g" [(ngModel)]="produto().descricao"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="produto-preco">Preço</label>
+                        <div class="campo-entrada">
+                            <i class="fa-solid fa-brazilian-real-sign"></i>
+                            <input type="number" id="produto-preco" name="preco" required min="0" step="0.01" placeholder="0,00" [(ngModel)]="produto().preco">
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="produto-categoria">Categoria</label>
+                        <div class="campo-entrada">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <select id="produto-categoria" name="categoria" required [(ngModel)]="produto().categoria">
+                                @for (categoria of categorias; track categoria) {
+                                <option [value]="categoria">{{ categoria }}</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="secao-form">Imagem</h3>
+                <div class="campo">
+                    <label for="produto-imagem">Caminho da imagem</label>
+                    <div class="campo-entrada">
+                        <i class="fa-solid fa-image"></i>
+                        <input type="text" id="produto-imagem" name="imagemUrl" placeholder="/assets/produtos/whey.png" [(ngModel)]="produto().imagemUrl">
+                    </div>
+                </div>
+
+                <div class="previa-imagem">
+                    @if (produto().imagemUrl) {
+                    <img [src]="produto().imagemUrl" [alt]="produto().nome">
+                    } @else {
+                    <span>Prévia da imagem</span>
+                    }
+                </div>
+
+                <div class="opcoes-form">
+                    <label for="checkbox-mais-vendido">
+                        <input type="checkbox" id="checkbox-mais-vendido" name="maisVendido" [(ngModel)]="produto().maisVendido">
+                        <span>Exibir na vitrine de mais vendidos</span>
+                    </label>
+                </div>
+
+                <div class="acoes-form">
+                    <a routerLink="/colaborador/produtos" id="botao-cancelar-produto" class="botao-contorno">Cancelar</a>
+                    <button type="submit" id="botao-salvar-produto" class="botao-ouro">
+                        @if (produtoId) {
+                        Salvar alterações <i class="fa-solid fa-floppy-disk"></i>
+                        } @else {
+                        Cadastrar produto <i class="fa-solid fa-plus"></i>
+                        }
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>

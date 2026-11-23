@@ -1,17 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { ClientesService } from '../../services/clientes.service';
 
 @Component({
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
   selector: 'app-login',
   styleUrls: ['../auth.css', './login.css'],
   templateUrl: './login.html',
 })
 export class Login {
-  constructor(private router: Router) {}
+  private service = inject(ClientesService);
+  private router = inject(Router);
 
-  entrar(evento: Event) {
-    evento.preventDefault();
-    this.router.navigate(['/']);
+  usuario: string = '';
+  senha: string = '';
+
+  //procura um cliente com o e-mail (ou CPF) e a senha digitados
+  entrar() {
+    this.service.listar().subscribe({
+      next: (clientes) => {
+        const cliente = clientes.find(c =>
+          (c.email === this.usuario || c.cpf === this.usuario) && c.senha === this.senha
+        );
+
+        if (cliente) {
+          alert(`Bem-vindo ${cliente.nome}!`);
+          this.router.navigate(['/']);
+        } else {
+          alert('E-mail/CPF ou senha inválidos.');
+        }
+      }
+    });
   }
 }
