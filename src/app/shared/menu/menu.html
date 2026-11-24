@@ -1,22 +1,22 @@
 <nav class="menu">
-  <a href="/" id="logo-topo"><img
-      src="/assets/logo/logo.png"
+  <a routerLink="/" id="logo-topo"><img
+      src="assets/logo/logo.png"
       alt="Canalha's Suplementos"
       class="menu-logo"
       height="50px"
     />
   </a>
   <div class="menu-itens">
-    <a href="/">HOME</a>
-    <a href="/produtos">PRODUTOS</a>
+    <a routerLink="/">HOME</a>
+    <a routerLink="/produtos">PRODUTOS</a>
   </div>
   <div id="menu-esquerda">
-    <img src="/assets/icons/lupa.svg" alt="Busca" height="30px" width="auto" />
-    <a routerLink="/login" id="link-icone-login"><img src="/assets/icons/usuario.svg" alt="Login" height="30px" width="auto" /></a>
-    <a routerLink="/cart"><img src="/assets/icons/carrinho.svg" alt="Carrinho" height="30px" width="auto" /></a>
+    <img src="assets/icons/lupa.svg" alt="Busca" height="30px" width="auto" />
+    <a routerLink="/login" id="link-icone-login"><img src="assets/icons/usuario.svg" alt="Login" height="30px" width="auto" /></a>
+    <a routerLink="/cart"><img src="assets/icons/carrinho.svg" alt="Carrinho" height="30px" width="auto" /></a>
     @if (ehAdmin()) {
       <a routerLink="/colaborador/produtos" id="link-admin" class="botao-admin"><i class="fa-solid fa-lock"></i> ADMIN</a>
-      <a href="/" (click)="sair()" id="link-sair" class="botao-admin">SAIR</a>
+      <a routerLink="/" (click)="sair()" id="link-sair" class="botao-admin">SAIR</a>
     }
   </div>
 </nav>

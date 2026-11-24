@@ -5,7 +5,7 @@
       "nome": "WHEY PROTEIN",
       "descricao": "Concentrado 900g",
       "preco": 119.9,
-      "imagemUrl": "/assets/produtos/whey.png",
+      "imagemUrl": "assets/produtos/whey.png",
       "maisVendido": true,
       "categoria": "Proteínas"
     },
@@ -14,7 +14,7 @@
       "nome": "CREATINA",
       "descricao": "Monohidratada 300g",
       "preco": 69.9,
-      "imagemUrl": "/assets/produtos/creatina.png",
+      "imagemUrl": "assets/produtos/creatina.png",
       "maisVendido": true,
       "categoria": "Creatina"
     },
@@ -23,7 +23,7 @@
       "nome": "PRÉ-TREINO",
       "descricao": "Insano 300g",
       "preco": 89.9,
-      "imagemUrl": "/assets/produtos/pre-treino.png",
+      "imagemUrl": "assets/produtos/pre-treino.png",
       "maisVendido": true,
       "categoria": "Pré-Treino"
     },
@@ -32,7 +32,7 @@
       "nome": "BCAA",
       "descricao": "120 cápsulas",
       "preco": 49.9,
-      "imagemUrl": "/assets/produtos/bcaa.png",
+      "imagemUrl": "assets/produtos/bcaa.png",
       "maisVendido": true,
       "categoria": "Vitaminas"
     },
@@ -41,7 +41,7 @@
       "nome": "CAMISETA DE TREINO CANALHAS",
       "descricao": "Tamanhos P, M, G e GG",
       "preco": 49.9,
-      "imagemUrl": "/assets/produtos/camiseta.png",
+      "imagemUrl": "assets/produtos/camiseta.png",
       "maisVendido": false,
       "categoria": "Vestimentas"
     },
@@ -50,7 +50,7 @@
       "nome": "GARRAFA CANALHAS",
       "descricao": "Coqueteleira de treino 700ml",
       "preco": 19.9,
-      "imagemUrl": "/assets/produtos/garrafa.png",
+      "imagemUrl": "assets/produtos/garrafa.png",
       "maisVendido": false,
       "categoria": "Acessórios"
     }
@@ -155,7 +155,7 @@
             "nome": "CREATINA",
             "descricao": "Monohidratada 300g",
             "preco": 69.9,
-            "imagemUrl": "/assets/produtos/creatina.png",
+            "imagemUrl": "assets/produtos/creatina.png",
             "maisVendido": true,
             "categoria": "Creatina"
           },
@@ -174,7 +174,7 @@
             "nome": "CREATINA",
             "descricao": "Monohidratada 300g",
             "preco": 69.9,
-            "imagemUrl": "/assets/produtos/creatina.png",
+            "imagemUrl": "assets/produtos/creatina.png",
             "maisVendido": true,
             "categoria": "Creatina"
           },
@@ -183,6 +183,82 @@
       ],
       "total": 139.8,
       "id": 2
+    },
+    {
+      "data": "24/11/2026, 01:15:22",
+      "itens": [
+        {
+          "produto": {
+            "id": 2,
+            "nome": "CREATINA",
+            "descricao": "Monohidratada 300g",
+            "preco": 69.9,
+            "imagemUrl": "assets/produtos/creatina.png",
+            "maisVendido": true,
+            "categoria": "Creatina"
+          },
+          "quantidade": 1
+        }
+      ],
+      "total": 69.9,
+      "id": 3
+    },
+    {
+      "data": "24/11/2026, 01:15:24",
+      "itens": [
+        {
+          "produto": {
+            "id": 2,
+            "nome": "CREATINA",
+            "descricao": "Monohidratada 300g",
+            "preco": 69.9,
+            "imagemUrl": "assets/produtos/creatina.png",
+            "maisVendido": true,
+            "categoria": "Creatina"
+          },
+          "quantidade": 1
+        }
+      ],
+      "total": 69.9,
+      "id": 4
+    },
+    {
+      "data": "24/11/2026, 19:57:49",
+      "itens": [
+        {
+          "produto": {
+            "id": 3,
+            "nome": "PRÉ-TREINO",
+            "descricao": "Insano 300g",
+            "preco": 89.9,
+            "imagemUrl": "assets/produtos/pre-treino.png",
+            "maisVendido": true,
+            "categoria": "Pré-Treino"
+          },
+          "quantidade": 2
+        }
+      ],
+      "total": 179.8,
+      "id": 5
+    },
+    {
+      "data": "24/11/2026, 19:57:52",
+      "itens": [
+        {
+          "produto": {
+            "id": 3,
+            "nome": "PRÉ-TREINO",
+            "descricao": "Insano 300g",
+            "preco": 89.9,
+            "imagemUrl": "assets/produtos/pre-treino.png",
+            "maisVendido": true,
+            "categoria": "Pré-Treino"
+          },
+          "quantidade": 2
+        }
+      ],
+      "total": 179.8,
+      "id": 6
     }
   ]
 }
