@@ -8,4 +8,11 @@ import { RouterLink } from '@angular/router';
   templateUrl: './menu.html',
 })
 export class Menu {
+  ehAdmin() {
+    return localStorage.getItem('admin') === 'sim';
+  }
+
+  sair() {
+    localStorage.removeItem('admin');
+  }
 }

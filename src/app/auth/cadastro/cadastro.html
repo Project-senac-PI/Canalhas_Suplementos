@@ -144,19 +144,6 @@
                     </div>
                 </div>
 
-                <div class="opcoes-form coluna">
-                    @if (!clienteId) {
-                    <label for="checkbox-termos">
-                        <input type="checkbox" id="checkbox-termos" required>
-                        <span>Li e aceito os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a></span>
-                    </label>
-                    }
-                    <label for="checkbox-newsletter">
-                        <input type="checkbox" id="checkbox-newsletter" name="newsletter" [(ngModel)]="cliente().newsletter">
-                        <span>Quero receber ofertas e novidades por e-mail</span>
-                    </label>
-                </div>
-
                 <button type="submit" id="botao-enviar-cadastro" class="botao-ouro">
                     @if (clienteId) {
                     Salvar alterações <i class="fa-solid fa-floppy-disk"></i>

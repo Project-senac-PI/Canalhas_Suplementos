@@ -269,50 +269,6 @@
 }
 
 
-.frete {
-    margin-top: 25px;
-}
-
-.frete h3 {
-    font-size: 14px;
-
-    margin-bottom: 12px;
-}
-
-
-.frete-form {
-    display: flex;
-
-    gap: 10px;
-}
-
-.frete-form input {
-    flex: 1;
-
-    padding: 12px;
-
-    background-color: #202425;
-
-    border: 1px solid #333;
-
-    color: white;
-
-    outline: none;
-}
-
-.frete-form button {
-    padding: 0 20px;
-
-    background-color: #dda317;
-
-    border: none;
-
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-
 
 @media (max-width: 900px) {
 

@@ -18,6 +18,13 @@ export class Login {
 
   //procura um cliente com o e-mail (ou CPF) e a senha digitados
   entrar() {
+    if (this.usuario === 'admin@canalhas.com' && this.senha === 'admin') {
+      localStorage.setItem('admin', 'sim');
+      alert('Bem-vindo Admin!');
+      this.router.navigate(['/']);
+      return;
+    }
+
     this.service.listar().subscribe({
       next: (clientes) => {
         const cliente = clientes.find(c =>
@@ -25,6 +32,7 @@ export class Login {
         );
 
         if (cliente) {
+          localStorage.removeItem('admin');
           alert(`Bem-vindo ${cliente.nome}!`);
           this.router.navigate(['/']);
         } else {

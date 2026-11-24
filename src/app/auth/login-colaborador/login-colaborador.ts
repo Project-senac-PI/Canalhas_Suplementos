@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { FuncionariosService } from '../../services/funcionarios.service';
 
 @Component({
-  imports: [RouterLink, FormsModule],
+  imports: [FormsModule],
   selector: 'app-login-colaborador',
   styleUrls: ['../auth.css', './login-colaborador.css'],
   templateUrl: './login-colaborador.html',
